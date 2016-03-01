@@ -4,22 +4,27 @@ var $ = window.$ = require('substance/util/jquery');
 var Component = require('substance/ui/Component');
 var Icon = require('substance/ui/FontAwesomeIcon');
 var ProseEditor = require('substance/packages/prose-editor/ProseEditor');
-var InsertTableTool = require('substance/packages/table/InsertTableTool');
+// var InsertTableTool = require('substance/packages/table/InsertTableTool');
+
+var InsertImageTool = require('substance/packages/image/ImageTool');
+
 var example = require('substance/test/fixtures/collab/poem');
 var $$ = Component.$$;
 
-var config = {
+var config = ProseEditor.static.mergeConfig(ProseEditor.static.config, {
   controller: {
     components: {
-      'table': require('substance/packages/table/TableComponent')
+      // 'table': require('substance/packages/table/TableComponent')
+      'image': require('substance/packages/image/ImageComponent')
     }
   },
   bodyEditor: {
     commands: [
-      require('substance/packages/table/InsertTableCommand')
+      // require('substance/packages/table/InsertTableCommand')
+      require('substance/packages/image/ImageCommand')
     ]
   }
-};
+});
 
 function App() {
   App.super.apply(this, arguments);
@@ -35,7 +40,8 @@ App.Prototype = function() {
       config: config
     });
     editor.outlet('tools').append(
-      $$(InsertTableTool).append($$(Icon, {icon: 'fa-table'}))
+      // $$(InsertTableTool).append($$(Icon, {icon: 'fa-table'}))
+      $$(InsertImageTool).append($$(Icon, {icon: 'fa-image'}))
     );
 
     el.append(editor);
