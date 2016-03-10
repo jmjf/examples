@@ -10,20 +10,28 @@ var AlienComponent = require('./alien/AlienComponent');
 var InsertAlienCommand = require('./alien/InsertAlienCommand');
 var InsertAlienTool = require('./alien/InsertAlienTool');
 
+var EntityNode = require('./entity/EntityNode');
+var EntityComponent = require('./entity/EntityComponent');
+var InsertEntityCommand = require('./entity/InsertEntityCommand');
+var InsertEntityTool = require('./entity/InsertEntityTool');
+
 var example = require('substance/test/fixtures/collab/poem');
 var doc = example.createArticle();
 var schema = doc.getSchema();
 schema.addNode(AlienNode);
+schema.addNode(EntityNode);
 
 var config = ProseEditor.static.mergeConfig(ProseEditor.static.config, {
   controller: {
     components: {
-      'alien': AlienComponent
+      'alien': AlienComponent,
+      'entity': EntityComponent
     }
   },
   bodyEditor: {
     commands: [
-      InsertAlienCommand
+      InsertAlienCommand,
+      InsertEntityCommand
     ]
   }
 });
@@ -43,7 +51,8 @@ App.Prototype = function() {
       config: config
     });
     editor.outlet('tools').append(
-      $$(InsertAlienTool)
+      $$(InsertAlienTool),
+      $$(InsertEntityTool)
     );
 
     el.append(editor);
