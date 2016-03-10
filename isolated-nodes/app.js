@@ -2,7 +2,6 @@
 
 var $ = window.$ = require('substance/util/jquery');
 var Component = require('substance/ui/Component');
-var Icon = require('substance/ui/FontAwesomeIcon');
 var ProseEditor = require('substance/packages/prose-editor/ProseEditor');
 
 var AlienNode = require('./alien/AlienNode');
@@ -14,6 +13,9 @@ var EntityNode = require('./entity/EntityNode');
 var EntityComponent = require('./entity/EntityComponent');
 var InsertEntityCommand = require('./entity/InsertEntityCommand');
 var InsertEntityTool = require('./entity/InsertEntityTool');
+
+var InsertContainerCommand = require('./container/InsertContainerCommand');
+var InsertContainerTool = require('./container/InsertContainerTool');
 
 var example = require('substance/test/fixtures/collab/poem');
 var doc = example.createArticle();
@@ -31,9 +33,15 @@ var config = ProseEditor.static.mergeConfig(ProseEditor.static.config, {
   bodyEditor: {
     commands: [
       InsertAlienCommand,
-      InsertEntityCommand
+      InsertEntityCommand,
+      InsertContainerCommand
     ]
-  }
+  },
+  tools: [
+    InsertAlienTool,
+    InsertEntityTool,
+    InsertContainerTool
+  ]
 });
 
 function App() {
@@ -51,8 +59,9 @@ App.Prototype = function() {
       config: config
     });
     editor.outlet('tools').append(
-      $$(InsertAlienTool),
-      $$(InsertEntityTool)
+      config.tools.map(function(Tool) {
+        return $$(Tool);
+      })
     );
 
     el.append(editor);
