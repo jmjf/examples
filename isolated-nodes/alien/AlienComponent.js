@@ -25,6 +25,19 @@ AlienComponent.Prototype = function() {
     return el;
   };
 
+  this.getDocument = function() {
+    return this.props.node.getDocument();
+  };
+
+  this.didMount = function() {
+    // TODO: improve this API by introducing a proxy on the node itself
+    this.getDocument().getEventProxy('path').connect(this, [this.props.node.id, 'mood'], this.onChange);
+  };
+
+  this.dispose = function() {
+    this.getDocument().getEventProxy('path').disconnect(this);
+  };
+
   var _moods = ['normal', 'angry', 'excited', 'sad', 'sick'];
 
   this.onClick = function(event) {
@@ -41,6 +54,10 @@ AlienComponent.Prototype = function() {
     surface.transaction(function(tx) {
       tx.set([node.id, 'mood'], mood);
     });
+    this.rerender();
+  };
+
+  this.onChange = function() {
     this.rerender();
   };
 
