@@ -1,7 +1,6 @@
 'use strict';
 
-var SurfaceCommand = require('substance/ui/SurfaceCommand');
-var insertNode = require('substance/model/transform/insertNode');
+var InsertNodeCommand = require('substance/ui/InsertNodeCommand');
 
 function InsertAlienCommand() {
   InsertAlienCommand.super.apply(this, arguments);
@@ -9,36 +8,16 @@ function InsertAlienCommand() {
 
 InsertAlienCommand.Prototype = function() {
 
-  this.getCommandState = function() {
-    var sel = this.getSelection();
-    var newState = {
-      disabled: true,
-      active: false
+  this.createNodeData = function() {
+    return {
+      type: 'alien',
+      mood: 'normal'
     };
-    if (sel && !sel.isNull() && sel.isPropertySelection()) {
-      newState.disabled = false;
-    }
-    console.log('InsertAlienCommand.getCommandState()', newState);
-    return newState;
   };
 
-  this.execute = function() {
-    var state = this.getCommandState();
-    // Return if command is disabled
-    if (state.disabled) return;
-    var surface = this.getSurface();
-    surface.transaction(function(tx, args) {
-      args.node = {
-        type: 'alien',
-        mood: 'normal'
-      };
-      return insertNode(tx, args);
-    });
-  };
 };
 
-
-SurfaceCommand.extend(InsertAlienCommand);
+InsertNodeCommand.extend(InsertAlienCommand);
 
 InsertAlienCommand.static.name = 'insert-alien';
 
