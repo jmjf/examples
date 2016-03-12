@@ -13,7 +13,7 @@ InsertContainerCommand.Prototype = function() {
     var textType = tx.getSchema().getDefaultTextType();
     var p = tx.create({
       type: textType,
-      content: ''
+      content: 'Lorem ipsum'
     });
     args.node = {
       type: 'container',

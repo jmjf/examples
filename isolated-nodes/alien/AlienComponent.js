@@ -19,7 +19,7 @@ AlienComponent.Prototype = function() {
     }
 
     var overlay = $$('div').addClass('se-overlay')
-      .append($$('button').append('Click Here').on('mousedown', this.onClick));
+      .append($$('button').append('Click Here').on('click', this.onClick));
     el.append(overlay);
 
     return el;

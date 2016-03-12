@@ -10,7 +10,9 @@ InsertEntityCommand.Prototype = function() {
 
   this.createNodeData = function() {
     return {
-      type: 'entity'
+      type: 'entity',
+      name: 'Foo',
+      description: 'Bar'
     };
   };
 

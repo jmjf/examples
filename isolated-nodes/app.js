@@ -14,6 +14,7 @@ var EntityComponent = require('./entity/EntityComponent');
 var InsertEntityCommand = require('./entity/InsertEntityCommand');
 var InsertEntityTool = require('./entity/InsertEntityTool');
 
+var ContainerComponent = require('./container/ContainerComponent');
 var InsertContainerCommand = require('./container/InsertContainerCommand');
 var InsertContainerTool = require('./container/InsertContainerTool');
 
@@ -23,11 +24,30 @@ var schema = doc.getSchema();
 schema.addNode(AlienNode);
 schema.addNode(EntityNode);
 
+var body = doc.get('body');
+var p1 = doc.create({
+  type: 'paragraph',
+  content: 'Lorem ipsum'
+})
+var c1 = doc.create({
+  type: 'container',
+  nodes: [p1.id]
+});
+body.show(c1.id, 3);
+
+var e1 = doc.create({
+  type: 'entity',
+  name: 'Foo',
+  description: 'Bar'
+});
+body.show(e1.id, 4);
+
 var config = ProseEditor.static.mergeConfig(ProseEditor.static.config, {
   controller: {
     components: {
       'alien': AlienComponent,
-      'entity': EntityComponent
+      'entity': EntityComponent,
+      'container': ContainerComponent
     }
   },
   bodyEditor: {

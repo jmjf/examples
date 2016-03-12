@@ -1,7 +1,7 @@
 'use strict';
 
 var Component = require('substance/ui/Component');
-var TextProperty = require('substance/ui/TextPropertyComponent');
+var TextPropertyEditor = require('substance/ui/TextPropertyEditor');
 var $$ = Component.$$;
 
 function EntityComponent() {
@@ -15,13 +15,13 @@ EntityComponent.Prototype = function() {
 
     var nameEl = $$('div').addClass('se-name');
     nameEl.append($$('div').addClass('se-label').append('Name:'));
-    nameEl.append($$(TextProperty, {
+    nameEl.append($$(TextPropertyEditor, {
       path: [this.props.node.id, 'name']
     }));
 
     var descriptionEl = $$('div').addClass('se-description');
     descriptionEl.append($$('div').addClass('se-label').append('Description:'));
-    descriptionEl.append($$(TextProperty, {
+    descriptionEl.append($$(TextPropertyEditor, {
       path: [this.props.node.id, 'description']
     }));
 
@@ -35,6 +35,6 @@ EntityComponent.Prototype = function() {
 
 Component.extend(EntityComponent);
 
-EntityComponent.static.isEditor = true;
+EntityComponent.static.isPropertyEditor = true;
 
 module.exports = EntityComponent;
