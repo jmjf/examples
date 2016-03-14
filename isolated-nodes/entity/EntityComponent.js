@@ -11,7 +11,7 @@ function EntityComponent() {
 EntityComponent.Prototype = function() {
 
   this.render = function() {
-    var el = $$('div').addClass('sc-entity');
+    var el = $$('div').addClass('sc-entity').attr('data-id', this.props.node.id);
 
     var nameEl = $$('div').ref('name').addClass('se-name');
     nameEl.append($$('div').ref('name.label').addClass('se-label').append('Name:'));
