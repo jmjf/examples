@@ -13,17 +13,17 @@ EntityComponent.Prototype = function() {
   this.render = function() {
     var el = $$('div').addClass('sc-entity');
 
-    var nameEl = $$('div').addClass('se-name');
-    nameEl.append($$('div').addClass('se-label').append('Name:'));
+    var nameEl = $$('div').ref('name').addClass('se-name');
+    nameEl.append($$('div').ref('name.label').addClass('se-label').append('Name:'));
     nameEl.append($$(TextPropertyEditor, {
       path: [this.props.node.id, 'name']
-    }));
+    }).ref('name.editor'));
 
-    var descriptionEl = $$('div').addClass('se-description');
-    descriptionEl.append($$('div').addClass('se-label').append('Description:'));
+    var descriptionEl = $$('div').ref('description').addClass('se-description');
+    descriptionEl.append($$('div').ref('description.label').addClass('se-label').append('Description:'));
     descriptionEl.append($$(TextPropertyEditor, {
       path: [this.props.node.id, 'description']
-    }));
+    }).ref('description.editor'));
 
     el.append(nameEl);
     el.append(descriptionEl);
