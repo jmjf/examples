@@ -31,12 +31,14 @@ var p1 = doc.create({
 })
 var c1 = doc.create({
   type: 'container',
+  id: 'ns1',
   nodes: [p1.id]
 });
 body.show(c1.id, 3);
 
 var e1 = doc.create({
   type: 'entity',
+  id: 'ns2',
   name: 'Foo',
   description: 'Bar'
 });
