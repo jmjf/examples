@@ -26,6 +26,7 @@ schema.addNode(EntityNode);
 
 var body = doc.get('body');
 var p1 = doc.create({
+  id: '_p1',
   type: 'paragraph',
   content: 'Lorem ipsum'
 })
@@ -36,9 +37,21 @@ var c1 = doc.create({
 });
 body.show(c1.id, 3);
 
+var p2 = doc.create({
+  id: '_p2',
+  type: 'paragraph',
+  content: 'Lorem ipsum'
+})
+var c2 = doc.create({
+  type: 'container',
+  id: 'ns2',
+  nodes: [p2.id]
+});
+c1.show(c2.id, 1);
+
 var e1 = doc.create({
   type: 'entity',
-  id: 'ns2',
+  id: 'e1',
   name: 'Foo',
   description: 'Bar'
 });
