@@ -29,7 +29,7 @@ var p1 = doc.create({
   id: '_p1',
   type: 'paragraph',
   content: 'Lorem ipsum'
-})
+});
 var c1 = doc.create({
   type: 'container',
   id: 'ns1',
@@ -41,7 +41,7 @@ var p2 = doc.create({
   id: '_p2',
   type: 'paragraph',
   content: 'Lorem ipsum'
-})
+});
 var c2 = doc.create({
   type: 'container',
   id: 'ns2',
@@ -49,13 +49,20 @@ var c2 = doc.create({
 });
 c1.show(c2.id, 1);
 
+var p3 = doc.create({
+  id: '_p3',
+  type: 'paragraph',
+  content: 'Lorem ipsum'
+});
+body.show(p3.id, 4);
+
 var e1 = doc.create({
   type: 'entity',
   id: 'e1',
   name: 'Foo',
   description: 'Bar'
 });
-body.show(e1.id, 4);
+body.show(e1.id, 5);
 
 var config = ProseEditor.static.mergeConfig(ProseEditor.static.config, {
   controller: {
